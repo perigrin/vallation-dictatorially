@@ -41,7 +41,38 @@ Bless size: 420 bytes
        24.68 real        24.62 user         0.05 sys
 ```
 
-These results are consistent across several runs (see the bottom for a 3x run) on this machine.
+I also ran this on an Intel Macbook to see if that was the difference, on my
+13-inch, 2020 MacBook Pro with 2.3 GHz Quad-Core Intel Core i7:
+
+```
++ MOOSE=1
++ time perl ./test.pl
+Moose: Create and access: 49 wallclock secs (47.73 usr +  0.11 sys = 47.84 CPU) @ 418060.20/s (n=20000000)
+Moose: Create object: 34 wallclock secs (34.58 usr +  0.05 sys = 34.63 CPU) @ 577533.93/s (n=20000000)
+Moose size: 420 bytes
+       89.20 real        88.83 user         0.17 sys
++ MOO=1
++ time perl ./test.pl
+Moo: Create and access: 34 wallclock secs (34.25 usr +  0.02 sys = 34.27 CPU) @ 583600.82/s (n=20000000)
+Moo: Create object: 22 wallclock secs (23.20 usr +  0.02 sys = 23.22 CPU) @ 861326.44/s (n=20000000)
+Moo size: 420 bytes
+       62.66 real        62.49 user         0.06 sys
++ COR=1
++ time perl ./test.pl
+Core: Create and access: 30 wallclock secs (29.51 usr +  0.02 sys = 29.53 CPU) @ 677277.35/s (n=20000000)
+Core: Create object: 19 wallclock secs (18.05 usr +  0.01 sys = 18.06 CPU) @ 1107419.71/s (n=20000000)
+Core size: 107 bytes
+       52.36 real        52.29 user         0.03 sys
++ BLESS=1
++ time perl ./test.pl
+Bless: Create and access: 18 wallclock secs (18.36 usr +  0.01 sys = 18.37 CPU) @ 1088731.63/s (n=20000000)
+Bless: Create object:  8 wallclock secs ( 9.69 usr +  0.01 sys =  9.70 CPU) @ 2061855.67/s (n=20000000)
+Bless size: 420 bytes
+       32.82 real        32.78 user         0.02 sys
+```
+
+I also tried this on a fresh install of ubuntu in an LXC container:
+
 
 
 
@@ -127,3 +158,80 @@ Bless: Create object:  7 wallclock secs ( 6.95 usr +  0.02 sys =  6.97 CPU) @ 28
 Bless size: 420 bytes
        24.30 real        24.25 user         0.04 sys
 ```
+
+## FULL RUN 13-inch, 2020 MacBook Pro with 2.3 GHz Quad-Core Intel Core i7
+```
++ MOOSE=1
++ time perl ./test.pl
+Moose: Create and access: 49 wallclock secs (47.73 usr +  0.11 sys = 47.84 CPU) @ 418060.20/s (n=20000000)
+Moose: Create object: 34 wallclock secs (34.58 usr +  0.05 sys = 34.63 CPU) @ 577533.93/s (n=20000000)
+Moose size: 420 bytes
+       89.20 real        88.83 user         0.17 sys
++ MOO=1
++ time perl ./test.pl
+Moo: Create and access: 34 wallclock secs (34.25 usr +  0.02 sys = 34.27 CPU) @ 583600.82/s (n=20000000)
+Moo: Create object: 22 wallclock secs (23.20 usr +  0.02 sys = 23.22 CPU) @ 861326.44/s (n=20000000)
+Moo size: 420 bytes
+       62.66 real        62.49 user         0.06 sys
++ COR=1
++ time perl ./test.pl
+Core: Create and access: 30 wallclock secs (29.51 usr +  0.02 sys = 29.53 CPU) @ 677277.35/s (n=20000000)
+Core: Create object: 19 wallclock secs (18.05 usr +  0.01 sys = 18.06 CPU) @ 1107419.71/s (n=20000000)
+Core size: 107 bytes
+       52.36 real        52.29 user         0.03 sys
++ BLESS=1
++ time perl ./test.pl
+Bless: Create and access: 18 wallclock secs (18.36 usr +  0.01 sys = 18.37 CPU) @ 1088731.63/s (n=20000000)
+Bless: Create object:  8 wallclock secs ( 9.69 usr +  0.01 sys =  9.70 CPU) @ 2061855.67/s (n=20000000)
+Bless size: 420 bytes
+       32.82 real        32.78 user         0.02 sys
++ MOOSE=1
++ time perl ./test.pl
+Moose: Create and access: 42 wallclock secs (41.70 usr +  0.03 sys = 41.73 CPU) @ 479271.51/s (n=20000000)
+Moose: Create object: 31 wallclock secs (30.84 usr +  0.02 sys = 30.86 CPU) @ 648088.14/s (n=20000000)
+Moose size: 420 bytes
+       77.42 real        77.30 user         0.06 sys
++ MOO=1
++ time perl ./test.pl
+Moo: Create and access: 34 wallclock secs (33.81 usr +  0.08 sys = 33.89 CPU) @ 590144.59/s (n=20000000)
+Moo: Create object: 21 wallclock secs (22.50 usr +  0.02 sys = 22.52 CPU) @ 888099.47/s (n=20000000)
+Moo size: 420 bytes
+       61.32 real        61.06 user         0.10 sys
++ COR=1
++ time perl ./test.pl
+Core: Create and access: 29 wallclock secs (29.80 usr +  0.02 sys = 29.82 CPU) @ 670690.81/s (n=20000000)
+Core: Create object: 19 wallclock secs (18.43 usr +  0.02 sys = 18.45 CPU) @ 1084010.84/s (n=20000000)
+Core size: 107 bytes
+       53.24 real        53.14 user         0.04 sys
++ BLESS=1
++ time perl ./test.pl
+Bless: Create and access: 18 wallclock secs (18.31 usr +  0.02 sys = 18.33 CPU) @ 1091107.47/s (n=20000000)
+Bless: Create object:  9 wallclock secs ( 9.81 usr +  0.00 sys =  9.81 CPU) @ 2038735.98/s (n=20000000)
+Bless size: 420 bytes
+       33.04 real        32.98 user         0.02 sys
++ MOOSE=1
++ time perl ./test.pl
+Moose: Create and access: 42 wallclock secs (41.72 usr +  0.02 sys = 41.74 CPU) @ 479156.68/s (n=20000000)
+Moose: Create object: 31 wallclock secs (30.64 usr +  0.02 sys = 30.66 CPU) @ 652315.72/s (n=20000000)
+Moose size: 420 bytes
+       77.35 real        77.24 user         0.05 sys
++ MOO=1
++ time perl ./test.pl
+Moo: Create and access: 33 wallclock secs (32.33 usr +  0.02 sys = 32.35 CPU) @ 618238.02/s (n=20000000)
+Moo: Create object: 22 wallclock secs (22.02 usr +  0.01 sys = 22.03 CPU) @ 907852.93/s (n=20000000)
+Moo size: 420 bytes
+       59.03 real        58.96 user         0.03 sys
++ COR=1
++ time perl ./test.pl
+Core: Create and access: 30 wallclock secs (29.13 usr +  0.01 sys = 29.14 CPU) @ 686341.80/s (n=20000000)
+Core: Create object: 18 wallclock secs (18.14 usr + -0.00 sys = 18.14 CPU) @ 1102535.83/s (n=20000000)
+Core size: 107 bytes
+       52.01 real        51.95 user         0.03 sys
++ BLESS=1
++ time perl ./test.pl
+Bless: Create and access: 19 wallclock secs (18.22 usr +  0.01 sys = 18.23 CPU) @ 1097092.70/s (n=20000000)
+Bless: Create object: 10 wallclock secs ( 9.63 usr +  0.00 sys =  9.63 CPU) @ 2076843.20/s (n=20000000)
+Bless size: 420 bytes
+       32.63 real        32.59 user         0.02 sys
+```
+
