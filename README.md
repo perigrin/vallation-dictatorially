@@ -1,3 +1,5 @@
+TL;DR: I cannot re-produce jnap's results.
+
 Having read John Napiorkowski's
 [post](https://dev.to/jjn1056/benchmarking-core-class-573c) benchmarking the
 new class feature in 5.38.0, I didn't find his results too surprising. I
@@ -106,7 +108,26 @@ I ran each run 3x on each box to make sure there wasn't any system caching or
 something that was going to affect performance and all the runs were
 comparable. You can see them for yourself below.
 
+Finally I ran Jnap's original code to make sure my changes weren't the cause of these different results:
 
+```
+Moose: Create and access: 41 wallclock secs (42.17 usr +  0.04 sys = 42.21 CPU) @ 473821.37/s (n=20000000)
+Moo: Create and access: 35 wallclock secs (34.71 usr +  0.03 sys = 34.74 CPU) @ 575705.24/s (n=20000000)
+Core: Create and access: 30 wallclock secs (29.34 usr +  0.02 sys = 29.36 CPU) @ 681198.91/s (n=20000000)
+Bless: Create and access: 11 wallclock secs (11.21 usr +  0.01 sys = 11.22 CPU) @ 1782531.19/s (n=20000000)
+Moose: Create object: 30 wallclock secs (31.13 usr +  0.02 sys = 31.15 CPU) @ 642054.57/s (n=20000000)
+Moo: Create object: 23 wallclock secs (22.35 usr +  0.01 sys = 22.36 CPU) @ 894454.38/s (n=20000000)
+Core: Create object: 19 wallclock secs (18.82 usr +  0.01 sys = 18.83 CPU) @ 1062134.89/s (n=20000000)
+Bless: Create object:  5 wallclock secs ( 4.43 usr + -0.01 sys =  4.42 CPU) @ 4524886.88/s (n=20000000)
+Moose size: 420 bytes
+Moo size: 420 bytes
+Core size: 107 bytes
+Bless size: 120 bytes
+```
+
+SO while I fully believe John's results, I cannot reproduce them on any of my
+machines. I'm seeing a distinct performance benefit to the class feature over
+Moo and Moose but not as much as a bare bless.
 
 ## FULL RUN 13-inch, M1, 2020 MacBook Pro
 
